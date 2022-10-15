@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'uploads',
     'import_export',
+    'user',
+    'crispy_forms',
 
 
 
@@ -132,3 +134,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_HOST_USER = "abjayakar@gmail.com"
+EMAIL_HOST_PASSWORD = "abj#4346"
