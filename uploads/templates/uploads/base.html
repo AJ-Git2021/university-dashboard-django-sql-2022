@@ -89,13 +89,14 @@
     {% if user.is_authenticated %}
     <center><h1>Welcome back {{user.username}}!</h1></center>
        <h1>This is the home page</h1>
-    <ul>
+       <ul>
       {% for d in data %}
       <li>
-        <p>{{d.name}} , {{d.description}}</p>
+        <p>{{d.sap}} , {{d.student_name}}, {{d.course_number}}</p>
       </li>
       {% endfor %}
     </ul>
+
     {% else %}
     <center><h1>Login is required to view sensitive data</h1></center>
     {% endif %}

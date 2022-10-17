@@ -1,0 +1,11 @@
+make to  tables in sqlite3
+
+add the upload_name models // no need
+
+ADD BLANK COLUMN ID IN ALL TABLES SO CSV IMPORT IS POSSIBLE
+
+make the 'id' as the pk of the tables 
+check for a single table import for the id issue
+add analysis view and button on nav
+put the analysis code into the view
+
