@@ -1,0 +1,15 @@
+{% extends 'download_data/base.html' %} {% load crispy_forms_tags %} 
+{% block content %}
+
+<div class="container-fluid" style="padding: 1.2em; margin-left: 2em">
+  <div class="form-data-tags">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div style="padding: 1.2em; margin-left: 2em">{{form | crispy}}</div>
+      <div style="padding: 1.2em; margin-left: 2em">
+        <input type="submit" value="Submit" style="color: black; font-size: medium;" />
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content%}

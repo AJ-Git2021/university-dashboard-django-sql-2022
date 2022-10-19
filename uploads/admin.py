@@ -7,7 +7,7 @@ class TaskAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ["name", "description"]
 
 
-class StudentAdmin(ImportMixin, admin.ModelAdmin):
+class StudentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ["sap", "student_name", "course_number"]
 
 
@@ -24,7 +24,7 @@ class QuestionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AnswerAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ["sap", "qp", "answer", "question_no"]
+    list_display = ["sap", "qp", "q1","q2","q3","q4","q5",'q6']
 
 
 class QuestionPaperAdmin(admin.ModelAdmin):

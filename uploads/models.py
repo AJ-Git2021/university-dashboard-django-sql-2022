@@ -17,13 +17,17 @@ class Answer(models.Model):
         "Student", models.DO_NOTHING, db_column="SAP"
     )  # Field name made lowercase.
     qp = models.ForeignKey("QuestionPaper", models.DO_NOTHING)
-    question_no = models.IntegerField()
-    answer = models.IntegerField(blank=True, null=True)
+    q1 = models.IntegerField(blank=True, null=True)
+    q2 = models.IntegerField(blank=True, null=True)
+    q3 = models.IntegerField(blank=True, null=True)
+    q4 = models.IntegerField(blank=True, null=True)
+    q5 = models.IntegerField(blank=True, null=True)
+    q6 = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = "answer"
-        unique_together = (("qp", "sap","question_no"),)
+        unique_together = (("qp", "sap"),)
 
 
 class AuthGroup(models.Model):
@@ -97,7 +101,7 @@ class AuthUserUserPermissions(models.Model):
 
 class Course(models.Model):
     id = models.IntegerField(blank=True, null=True)
-    course_number = models.CharField(primary_key=True, max_length=50)
+    course_number = models.CharField(primary_key=True, max_length=50,)
     course_name = models.CharField(max_length=50, blank=True, null=True)
     degree = models.CharField(max_length=50, blank=True, null=True)
     course_duration = models.IntegerField(blank=True, null=True)
@@ -182,7 +186,7 @@ class Faculty(models.Model):
 class Question(models.Model):
     id = models.IntegerField(primary_key=True)
     qp = models.ForeignKey("QuestionPaper", models.DO_NOTHING)
-    question_no = models.IntegerField()
+    question_no = models.CharField(max_length=50)
     co = models.IntegerField(
         db_column="CO", blank=True, null=True
     )  # Field name made lowercase.
@@ -227,9 +231,7 @@ class Semester(models.Model):
 
 class Student(models.Model):
     id = models.IntegerField(blank=True, null=True)
-    sap = models.IntegerField(
-        db_column="SAP", primary_key=True
-    )  # Field name made lowercase.
+    sap = models.CharField(primary_key=True, max_length=50) # Field name made lowercase.
     student_name = models.CharField(max_length=50, blank=True, null=True)
     course_number = models.ForeignKey(
         Course, models.DO_NOTHING, db_column="course_number", blank=True, null=True

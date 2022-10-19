@@ -11,7 +11,7 @@
   <meta name="language" content="English">
   <meta name="author" content="Atindra Jayakar">
 
-  <title>{{title}}</title>
+  <title>StudentAnalysis-Upload</title>
 
 
   <!-- bootstrap file -->
@@ -44,7 +44,34 @@
 
   <!--_______________________________________________-->
 
+<style>
+  body{
+    background: url('https://png.pngtree.com/58pic/32/72/77/96i58PIC1yUmURcFzEu7V_PIC2018.jpg') center no-repeat;
+    padding-left: 3%;
+  }
+    table {
+      
+      margin-left: 10%;
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
 
+    td, th {
+      border: 1px solid black;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr {
+      background-color: rgba(203, 220, 203, 10);
+    }
+    .upload-data{
+        color: azure;
+        text-align: left;
+        align-content: space-between;
+    }
+</style>
 
 </head>
 
@@ -63,13 +90,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">project</a>
+          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">StudentAnalysis</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavBar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url "index" %}">Home</a></li>
 
             {% if user.is_authenticated %}
+            <li><a href="http://127.0.0.1:8000/download/upload/"> &nbsp; UploadData </a></li>
+            <li><a href="#""> &nbsp; Analyse </a></li>
             <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Logout</a></li>
             {% else %}
             <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
@@ -87,13 +116,21 @@
   <div class="row">
     {% block start %}
     {% if user.is_authenticated %}
-    <h1>Welcome back {{user.username}},</h1>
+    <center><h5 style="color: white;">Welcome back <span style="text-transform:uppercase;">{{user.username}}</span>,</h5></center>
+      
+      <div class="upload-data">
+        {% block content%}
+        {% endblock %}
+      </div>
+
     {% else %}
     <center><h1>Login is required to view sensitive data</h1></center>
     {% endif %}
 
     {% endblock %}
   </div>
+
+
 </body>
 
 </html>

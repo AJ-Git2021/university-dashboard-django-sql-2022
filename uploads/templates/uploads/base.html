@@ -9,9 +9,9 @@
   <meta name="title" content="project">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="language" content="English">
-  <meta name="author" content="vinayak sharma">
+  <meta name="author" content="Atindra Jayakar">
 
-  <title>{{title}}</title>
+  <title>StudentAnalysis-Home</title>
 
 
   <!-- bootstrap file -->
@@ -44,7 +44,29 @@
 
   <!--_______________________________________________-->
 
+<style>
+  body{
+    background: url('https://png.pngtree.com/58pic/32/72/77/96i58PIC1yUmURcFzEu7V_PIC2018.jpg') center no-repeat;
+    padding-left: 3%;
+  }
+    table {
+      
+      margin-left: 10%;
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
 
+    td, th {
+      border: 1px solid black;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr {
+      background-color: rgba(203, 220, 203, 10);
+    }
+</style>
 
 </head>
 
@@ -63,13 +85,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">project</a>
+          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">StudentAnalysis</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavBar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url "index" %}">Home</a></li>
 
             {% if user.is_authenticated %}
+            <li><a href="http://127.0.0.1:8000/download/upload/"> &nbsp; UploadData </a></li>
+            <li><a href="#""> &nbsp; Analyse </a></li>
+            {% if user.is_superuser %}
+            <li><a href="http://127.0.0.1:8000/admin/"> &nbsp; AdminOptions </a></li>
+            {% endif %}
             <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Logout</a></li>
             {% else %}
             <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
@@ -87,15 +114,34 @@
   <div class="row">
     {% block start %}
     {% if user.is_authenticated %}
-    <center><h1>Welcome back {{user.username}}!</h1></center>
-       <h1>This is the home page</h1>
-       <ul>
-      {% for d in data %}
-      <li>
-        <p>{{d.sap}} , {{d.student_name}}, {{d.course_number}}</p>
-      </li>
-      {% endfor %}
-    </ul>
+        <center><h5 style="color: white;">Welcome back <span style="text-transform:uppercase;">{{user.username}}</span>,</h5></center>
+       <div class="headings-page" style="padding-left: 8em;">
+       <div>
+        {% block content1 %}{% endblock %}
+       </div>
+          <h3 style="color: white;">Students</h3>
+       </div>
+       <div class="table-contents" style="padding: 1em;">
+          <table>
+          <tr>
+            <th>SAP ID</th>
+            <th>Name</th>
+            <th>Course</th>
+          </tr>
+          {% for d in data %}
+          <tr>
+            <td>701{{d.sap}}</td>
+            <td>{{d.student_name}}</td>
+            <td>{{d.course_number.course_number}}</td>
+          </tr>
+          {% endfor %}
+        </table> 
+       </div>
+      
+      <div class="upload-data">
+        {% block content%}
+        {% endblock %}
+      </div>
 
     {% else %}
     <center><h1>Login is required to view sensitive data</h1></center>
@@ -103,6 +149,8 @@
 
     {% endblock %}
   </div>
+
+
 </body>
 
 </html>
