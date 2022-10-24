@@ -93,7 +93,7 @@
 
             {% if user.is_authenticated %}
             <li><a href="http://127.0.0.1:8000/download/upload/"> &nbsp; UploadData </a></li>
-            <li><a href="http://127.0.0.1:8000/question_ans/""> &nbsp; Question/Answer Overview </a></li>
+            <li><a href="#"> &nbsp; Question/Answer Overview </a></li>
             <li><a href="#""> &nbsp; Analyse </a></li>
             {% if user.is_superuser %}
             <li><a href="http://127.0.0.1:8000/admin/"> &nbsp; AdminOptions </a></li>
@@ -120,29 +120,67 @@
        <div>
         {% block content1 %}{% endblock %}
        </div>
-          <h3 style="color: white;">Students</h3>
+          <h3 style="color: white;">Question/Paper Overview</h3>
        </div>
        <div class="table-contents" style="padding: 1em;">
           <table>
           <tr>
-            <th>SAP ID</th>
-            <th>Name</th>
-            <th>Course</th>
+            <th>Question Paper ID</th>
+            <th>Total Marks</th>
           </tr>
-          {% for d in data %}
+          {% for q1 in quesp %}
           <tr>
-            <td>701{{d.sap}}</td>
-            <td>{{d.student_name}}</td>
-            <td>{{d.course_number.course_number}}</td>
+            <td>{{q1.qp_id}}</td>
+            <td>{{q1.total_marks}}</td>
           </tr>
           {% endfor %}
         </table> 
        </div>
-      
-      <div class="upload-data">
-        {% block content%}
-        {% endblock %}
+
+       <div class="table-contents" style="padding: 1em;">
+          <table>
+          <tr>
+            <th>Question Paper ID</th>
+            <th>Question No.</th>
+            <th>CO</th>
+            <th>SO</th>
+            <th>BL</th>
+            <th>Marks</th>
+
+          </tr>
+          {% for q2 in quesform %}
+          <tr>
+            <td>{{q2.qp_id}}</td>
+            <td>{{q2.question_no}}</td>
+            <td>{{q2.co}}</td>
+            <td>{{q2.so}}</td>
+            <td>{{q2.bl}}</td>
+            <td>{{q2.marks}}</td>
+          </tr>
+          {% endfor %}
+        </table> 
+       </div>
       </div>
+          <h3 style="color: white; padding-left: 6em;">Answer Overview</h3>
+       </div>
+      <div class="table-contents" style="padding: 1em;">
+          <table>
+          <tr>
+            <th>Question Paper ID</th>
+            <th>SAP</th>
+            <th>Question Number</th>
+            <th>Marks Awarded</th>
+          </tr>
+          {% for a3 in quesans %}
+          <tr>
+            <td>{{a3.qp_id}}</td>
+            <td>{{a3.sap}}</td>
+            <td>{{a3.question_no}}</td>
+            <td>{{a3.answered}}</td>          
+          </tr>
+          {% endfor %}
+        </table> 
+       </div>
 
     {% else %}
     <center><h1>Login is required to view sensitive data</h1></center>

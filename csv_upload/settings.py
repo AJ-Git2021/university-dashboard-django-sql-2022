@@ -88,7 +88,7 @@ WSGI_APPLICATION = "csv_upload.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "test_dbms",
+        "NAME": "test_dbms1",
         "USER": "root",
         "PASSWORD": "abj#4346",
         "HOST": "localhost",

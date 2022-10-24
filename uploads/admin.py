@@ -24,11 +24,19 @@ class QuestionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AnswerAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ["sap", "qp", "q1","q2","q3","q4","q5",'q6']
+    list_display = ["sap", "qp","question_no","answered"]
 
 
-class QuestionPaperAdmin(admin.ModelAdmin):
+class QuestionPaperAdmin(ImportExportMixin,admin.ModelAdmin):
     list_display = ["qp_id", "total_marks"]
+
+class SemesterAdmin(ImportExportMixin,admin.ModelAdmin):
+    list_display = ["course_number", "subject_number","semester_no"]
+
+
+class FacultyAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ["facid", "facname","qlfi","subject_number"]
+
 
 
 admin.site.register(Course, CourseAdmin)
@@ -37,5 +45,8 @@ admin.site.register(Subjects, SubjectsAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(QuestionPaper, QuestionPaperAdmin)
+admin.site.register(Faculty,FacultyAdmin)
+admin.site.register(Semester,SemesterAdmin)
 
-admin.site.register(Task, TaskAdmin)
+
+# admin.site.register(Task, TaskAdmin)

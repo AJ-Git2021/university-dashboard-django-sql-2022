@@ -4,7 +4,7 @@ from django.db import models
 class EBooksModel(models.Model):
  
     title = models.CharField(max_length = 80)
-    csv = models.FileField(upload_to='csvs/')
+    pdf = models.FileField(upload_to='csvs/')
  
     class Meta:
         ordering = ['title']

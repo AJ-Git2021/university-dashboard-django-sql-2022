@@ -16,18 +16,14 @@ class Answer(models.Model):
     sap = models.ForeignKey(
         "Student", models.DO_NOTHING, db_column="SAP"
     )  # Field name made lowercase.
-    qp = models.ForeignKey("QuestionPaper", models.DO_NOTHING)
-    q1 = models.IntegerField(blank=True, null=True)
-    q2 = models.IntegerField(blank=True, null=True)
-    q3 = models.IntegerField(blank=True, null=True)
-    q4 = models.IntegerField(blank=True, null=True)
-    q5 = models.IntegerField(blank=True, null=True)
-    q6 = models.IntegerField(blank=True, null=True)
+    qp = models.ForeignKey("QuestionPaper", models.DO_NOTHING, db_column="qp_id")
+    question_no = models.CharField(max_length=50)
+    answered = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = "answer"
-        unique_together = (("qp", "sap"),)
+        unique_together = (("qp", "sap", "question_no"),)
 
 
 class AuthGroup(models.Model):
@@ -176,7 +172,7 @@ class Faculty(models.Model):
     facid = models.IntegerField(primary_key=True)
     facname = models.CharField(max_length=50, blank=True, null=True)
     qlfi = models.CharField(max_length=50, blank=True, null=True)
-    subject_name = models.CharField(max_length=50, blank=True, null=True)
+    subject_number = models.ForeignKey("Subjects", models.DO_NOTHING, db_column="subject_number")
 
     class Meta:
         managed = True
@@ -215,23 +211,26 @@ class QuestionPaper(models.Model):
 
 
 class Semester(models.Model):
-    id = models.IntegerField(blank=True, null=True)
+    id = models.IntegerField(primary_key=True)
     course_number = models.ForeignKey(
         Course, models.DO_NOTHING, db_column="course_number", blank=True, null=True
     )
     subject_number = models.ForeignKey(
         "Subjects", models.DO_NOTHING, db_column="subject_number", blank=True, null=True
     )
-    semester_no = models.IntegerField(primary_key=True)
+    semester_no = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = "semester"
+        unique_together = (("course_number", "subject_number",),)
 
 
 class Student(models.Model):
     id = models.IntegerField(blank=True, null=True)
-    sap = models.CharField(primary_key=True, max_length=50) # Field name made lowercase.
+    sap = models.CharField(
+        primary_key=True, max_length=50
+    )  # Field name made lowercase.
     student_name = models.CharField(max_length=50, blank=True, null=True)
     course_number = models.ForeignKey(
         Course, models.DO_NOTHING, db_column="course_number", blank=True, null=True
