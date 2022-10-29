@@ -140,8 +140,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-# EMAIL_HOST_USER = "abjayakar@gmail.com"
-# EMAIL_HOST_PASSWORD = ""
 
 EDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
