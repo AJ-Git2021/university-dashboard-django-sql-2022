@@ -172,7 +172,9 @@ class Faculty(models.Model):
     facid = models.IntegerField(primary_key=True)
     facname = models.CharField(max_length=50, blank=True, null=True)
     qlfi = models.CharField(max_length=50, blank=True, null=True)
-    subject_number = models.ForeignKey("Subjects", models.DO_NOTHING, db_column="subject_number")
+    subject_number = models.ForeignKey(
+        "Subjects", models.DO_NOTHING, db_column="subject_number"
+    )
 
     class Meta:
         managed = True

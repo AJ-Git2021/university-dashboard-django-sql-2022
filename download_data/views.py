@@ -8,7 +8,9 @@ def BookUploadView(request):
         form = UploadBookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponse('The file is saved')
+            data = form.fields()
+            context = {'data':data}
+            return render(request,'uploads/base.html')
     else:
         form = UploadBookForm()
         context = {
